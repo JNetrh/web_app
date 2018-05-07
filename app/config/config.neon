@@ -1,0 +1,50 @@
+parameters:
+
+
+doctrine:
+    user: @App\Model\DbFactory::username
+    password: @App\Model\DbFactory::password
+    dbname: @App\Model\DbFactory::dbname
+    host: @App\Model\DbFactory::host
+    metadata:
+        App: %appDir%
+
+
+
+extensions:
+        console: Kdyby\Console\DI\ConsoleExtension
+        events: Kdyby\Events\DI\EventsExtension
+        annotations: Kdyby\Annotations\DI\AnnotationsExtension
+        doctrine: Kdyby\Doctrine\DI\OrmExtension
+
+
+application:
+	errorPresenter: App\FrontModule\Presenters\Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+
+services:
+	- App\Model\DbFactory
+	- App\Model\Services\UserService
+	- App\Model\Services\RightService
+	authenticator: App\Model\Authenticator
+	authorizatorFactory: App\Model\AuthorizatorFactory
+	authorizator: @authorizatorFactory::create
+
+	- App\Router\RouterFactory
+	router: @App\Router\RouterFactory::createRouter
+
+
+constants:
+    UPLOAD_DIR: ./
+
+
+
+
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#F8AF46">
+        <meta name="format-detection" content="telephone=no">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+        <meta name="robots" content="index, follow, archive, snippet">
+
+        <link href="{$basePath}/favicon.ico" rel="icon" type="image/x-icon">
+        <link rel="author" href="Jakub Netrh, netrh.j@gmail.com">
+        <!--CSS skar-is-->
+        <link rel="stylesheet" href="{$basePath}/css/main.css">
+        <!--CSS custom style-->
+        {*<link href="{$basePath}/css/style.css" rel="stylesheet" type="text/css"/>*}
+
+        <title>{ifset title}{include title|stripHtml} | Správa{/ifset} </title>
+    </head>
+
+    <body>
+    {*<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>*}
+        <header>
+
+        </header>
+
+        {include content}
+
+
+        <footer>
+
+        </footer>
+
+    {block scripts}
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js" type="text/javascript"></script>
+        <script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+        <script src="{$basePath}/js/main.js"></script>
+        {*<script src="{$basePath}/js/nette.ajax.js" type="text/javascript"></script>*}
+        {*<script src="{$basePath}/js/funkce.js" type="text/javascript"></script>*}
+        <script>
+            $(document).ready(function() {
+                $('.same-height').matchHeight({
+                    target: $('html')
+                });
+            });
+            {foreach $flashes as $flash}
+            var flash = {$flash->message};
+            setTimeout(function () {
+                flashMessage(flash);
+            },150)
+            {/foreach}
+        </script>
+    {/block}
+
+    </body>
+</html>
